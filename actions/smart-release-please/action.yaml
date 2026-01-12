@@ -21,20 +21,13 @@ runs:
       with:
         python-version: '3.14'
 
-    - name: Calculate Correct Stable Version
-      id: calc
-      if: ${{ github.ref_name == 'main' }}
-      shell: bash
-      run: python3 "${{ github.action_path }}/rc_align.py" --stable
-
     - name: Calculate Correct RC Version
       id: calc_rc
-      if: ${{ github.ref_name == 'next' }}
       shell: bash
       run: python3 "${{ github.action_path }}/rc_align.py"
 
     - name: Inject Release-As Footer
-      if: "${{ steps.calc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') }}"
+      if: "${{ steps.calc_rc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') }}"
       shell: bash
       run: |
         # Configure Git
@@ -42,7 +35,7 @@ runs:
         git config user.email "devops[bot]@mapcolonies.com"
 
         # Check if footer exists (Loop Protection)
-        TARGET_VER="${{ steps.calc.outputs.next_version }}"
+        TARGET_VER="${{ steps.calc_rc.outputs.next_version }}"
         LAST_MSG=$(git log -1 --pretty=%B)
         
         if [[ "$LAST_MSG" == *"Release-As: $TARGET_VER"* ]]; then
