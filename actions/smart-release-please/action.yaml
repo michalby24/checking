@@ -27,7 +27,7 @@ runs:
       run: python3 "${{ github.action_path }}/rc_align.py"
 
     - name: Inject Release-As Footer
-      if: "${{ steps.calc_rc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') }}"
+      if: "${{ ! (startsWith(github.event.head_commit.message, 'chore(') && contains(github.event.head_commit.message, '): release')) }}"
       shell: bash
       run: |
         # Configure Git
