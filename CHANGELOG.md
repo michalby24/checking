@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.1-rc.8](https://github.com/michalby24/checking/compare/v0.0.1-rc.7...v0.0.1-rc.8) (2026-01-12)
+
+
+### Bug Fixes
+
+* streamline version calculation logic and enhance commit filtering ([e4b600d](https://github.com/michalby24/checking/commit/e4b600d7cf8db97bfa910c32b1decadb12c4fa05))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([b7bd46b](https://github.com/michalby24/checking/commit/b7bd46bcd50258ed1ecb77ea17b194c73f900b86))
+
 ## [0.0.1-rc.7](https://github.com/michalby24/checking/compare/v0.0.1-rc.3...v0.0.1-rc.7) (2026-01-12)
 
 
