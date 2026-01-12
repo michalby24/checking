@@ -65,8 +65,6 @@ runs:
       run: |
         echo "Checking for existing release PRs on branch ${{ github.ref_name }}..."
         
-        # Find PRs with the autorelease label targeting our branch
-        # We store the PR number
         PR_NUMBER=$(gh pr list \
           --base "${{ github.ref_name }}" \
           --label "autorelease: pending" \
@@ -78,6 +76,16 @@ runs:
           gh pr close "$PR_NUMBER" --delete-branch
         else
           echo "No stale release PRs found."
+        fi
+
+    - name: set release type
+      id: set_release_type
+      shell: bash
+      run: |
+        if [ "${{ github.ref_name }}" == "main" ]; then
+          echo "RELEASE_TYPE=stable" >> $GITHUB_ENV
+        else
+          echo "RELEASE_TYPE=rc" >> $GITHUB_ENV
         fi
 
     - name: Run release-please
