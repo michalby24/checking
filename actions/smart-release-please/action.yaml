@@ -28,7 +28,7 @@ runs:
       run: python3 "${{ github.action_path }}/rc_align.py"
 
     - name: Inject Release-As Footer
-      if: "${{ steps.calc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') }}"
+      if: "${{ steps.calc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') && !contains(github.event.head_commit.message, \"Merge branch 'main' into next\") }}"
       shell: bash
       run: |
         # Configure Git
@@ -72,33 +72,6 @@ runs:
           gh pr close "$PR_NUMBER" --delete-branch
         else
           echo "No stale release PRs found."
-        fi
-
-    - name: Sanitize Manifest Version (Main Only)
-      id: sanitize
-      if: ${{ github.ref_name == 'main' }}
-      shell: bash
-      run: |
-        MANIFEST=".release-please-manifest.json"
-        
-        if [ -f "$MANIFEST" ]; then
-          
-          CURRENT_VER=$(jq -r '.["."]' "$MANIFEST")
-          
-          if [[ "$CURRENT_VER" == *"-"* ]]; then
-            STABLE_VER="${CURRENT_VER%%-*}"
-            
-            echo "🚨 RC Detected: $CURRENT_VER"
-            echo "✂️  Sanitizing to: $STABLE_VER"
-            
-            jq --arg v "$STABLE_VER" '.["."] = $v' "$MANIFEST" > "$MANIFEST.tmp" && mv "$MANIFEST.tmp" "$MANIFEST"
-            
-            echo "✅ Manifest updated locally."
-          else
-            echo "Version $CURRENT_VER is already stable. No change needed."
-          fi
-        else
-           echo "No manifest file found."
         fi
 
     - name: Run release-please
