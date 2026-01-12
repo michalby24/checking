@@ -91,14 +91,14 @@ def calculate_next_version(major, minor, patch, rc, depth, is_breaking, is_feat,
         return f"{major}.{minor}.{patch}-rc.{rc + depth}"
 
 def main():
-    if "--stable" in sys.argv:
-        # On main branch, we just want to strip -rc from the current version
-        # to create a stable release from an RC.
+    branch = os.environ.get("GITHUB_REF_NAME")
+
+    if branch in ["main", "master"]:
         try:
-            with open("package.json", "r") as f:
+            with open(".release-please-manifest.json", "r") as f:
                 import json
                 data = json.load(f)
-                version = data.get("version", "0.0.0")
+                version = data.get(".", "0.0.0")
                 stable_version = re.sub(r'-rc.*', '', version)
 
                 with open(os.environ["GITHUB_OUTPUT"], "a") as f:
