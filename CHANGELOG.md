@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.1-rc.10](https://github.com/michalby24/checking/compare/v0.0.1-rc.8...v0.0.1-rc.10) (2026-01-12)
+
+
+### Bug Fixes
+
+* remove redundant version enforcement log and streamline release type setting ([b5438af](https://github.com/michalby24/checking/commit/b5438af763ea5e23231eefbb61b3e801d5df75f0))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([ba4de47](https://github.com/michalby24/checking/commit/ba4de47b8a74ee2bef4b6f17289bb6068b2e1e4e))
+* enforce correct rc version ([434cd90](https://github.com/michalby24/checking/commit/434cd9000355a071d1a62038abaab1562e2c582d))
+
 ## [0.0.1-rc.8](https://github.com/michalby24/checking/compare/v0.0.1-rc.7...v0.0.1-rc.8) (2026-01-12)
 
 
