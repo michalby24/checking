@@ -32,8 +32,8 @@ runs:
     # 2. THE ENFORCER: Inject the footer if a version was returned
     - name: Enforce Version (Bridge)
       id: enforce
-      # Run if version found AND not a loop (bot commit)
-      if: "${{ steps.calc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') }}"
+      # Run if version found AND not a loop (bot commit) or a merge-from-main commit
+      if: "${{ steps.calc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') && !contains(github.event.head_commit.message, \"Merge branch 'main' into next\") }}"
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.token }}
