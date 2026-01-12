@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.2-rc.11](https://github.com/michalby24/checking/compare/v0.0.1-rc.11...v0.0.2-rc.11) (2026-01-12)
+
+
+### Bug Fixes
+
+* next ([#11](https://github.com/michalby24/checking/issues/11)) ([e2bc5ee](https://github.com/michalby24/checking/commit/e2bc5ee817be7c0eb9eb4c47db74a3ccd3a2cf2d))
+* next ([#2](https://github.com/michalby24/checking/issues/2)) ([d45b921](https://github.com/michalby24/checking/commit/d45b9218357a1afac496b0cfabe1263a6b8e3542))
+* next ([#5](https://github.com/michalby24/checking/issues/5)) ([5657b94](https://github.com/michalby24/checking/commit/5657b945eab619c03b3fe14633de304b664f3518))
+
 ## [0.0.1-rc.11](https://github.com/michalby24/checking/compare/v0.0.1-rc.10...v0.0.1-rc.11) (2026-01-12)
 
 
