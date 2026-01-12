@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.1-rc.16](https://github.com/michalby24/checking/compare/v0.0.1-rc.14...v0.0.1-rc.16) (2026-01-12)
+
+
+### Bug Fixes
+
+* refine condition for injecting Release-As footer ([bdf8079](https://github.com/michalby24/checking/commit/bdf8079fe8c565c3853d480c950dfcc85d154cb1))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([4f799be](https://github.com/michalby24/checking/commit/4f799be73d1cb354c4eca4300c379e457419cc99))
+* enforce correct rc version ([f2750da](https://github.com/michalby24/checking/commit/f2750da25acf99d9f67758f648a610f322225533))
+
 ## [0.0.1-rc.14](https://github.com/michalby24/checking/compare/v0.0.1-rc.11...v0.0.1-rc.14) (2026-01-12)
 
 
