@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.1-rc.7](https://github.com/michalby24/checking/compare/v0.0.1-rc.3...v0.0.1-rc.7) (2026-01-12)
+
+
+### Bug Fixes
+
+* update action description and enhance footer injection logic for RC versioning ([f2581a7](https://github.com/michalby24/checking/commit/f2581a7a6a9ddcb1359d26a975ca8e0f0f7c2bf6))
+* update condition for injecting Release-As footer and remove unused manifest sanitization step ([#8](https://github.com/michalby24/checking/issues/8)) ([9e977ca](https://github.com/michalby24/checking/commit/9e977cae981eb257058bb08577c3fb84d5e92be2))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([0d6bb76](https://github.com/michalby24/checking/commit/0d6bb768ad2d54678608b2b2eff09823ebe2b4a0))
+* enforce correct rc version ([32aadfd](https://github.com/michalby24/checking/commit/32aadfdd5b4aa7e8ad54cb7d13b1ca98ace5eb57))
+
 ## [0.0.1-rc.3](https://github.com/michalby24/checking/compare/v0.0.1-rc.2...v0.0.1-rc.3) (2026-01-12)
 
 
