@@ -29,10 +29,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.token }}
       run: python3 "${{ github.action_path }}/rc_align.py"
 
-    # 2. THE ENFORCER: Inject the footer if a version was returned
-    - name: Enforce Version (Bridge)
-      id: enforce
-      # Run if version found AND not a loop (bot commit) or a merge-from-main commit
+    - name: Inject Release-As Footer
       if: "${{ steps.calc.outputs.next_version != '' && !contains(github.event.head_commit.message, 'chore(next): release') && !contains(github.event.head_commit.message, \"Merge branch 'main' into next\") }}"
       shell: bash
       env:
@@ -57,7 +54,30 @@ runs:
         # Signal that we pushed, so we should skip release-please this run
         echo "SKIP_RELEASE=true" >> $GITHUB_ENV
 
-    # 3. RELEASE PLEASE (Run only if we didn't just push)
+    - name: Close Stale Release PRs
+      # Only run if we are NOT skipping (meaning we are ready to run release-please)
+      if: env.SKIP_RELEASE != 'true' && ${{ !contains(github.ref, 'release-please--branches') }}
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+      run: |
+        echo "Checking for existing release PRs on branch ${{ github.ref_name }}..."
+        
+        # Find PRs with the autorelease label targeting our branch
+        # We store the PR number
+        PR_NUMBER=$(gh pr list \
+          --base "${{ github.ref_name }}" \
+          --label "autorelease: pending" \
+          --json number \
+          --jq '.[0].number')
+
+        if [ -n "$PR_NUMBER" ]; then
+          echo "Found stale release PR #$PR_NUMBER. Closing it to force a fresh regeneration..."
+          gh pr close "$PR_NUMBER" --delete-branch
+        else
+          echo "No stale release PRs found."
+        fi
+
     - name: Run release-please
       if: env.SKIP_RELEASE != 'true'
       uses: googleapis/release-please-action@v4
